@@ -1,0 +1,395 @@
+% This is the Fancy Tutorial created by Gabriel Yin
+% Southern Methodist University, TX, USA, 75206
+% Contact: gyin@smu.edu.
+% All Rights Reserved since 2018
+% Any issue report or comment is SUPER welcome to be sent to me!!
+
+% This tutorial is designated for LaTeX first-runners in Windows system.
+
+% If you are using MacOX or Linux systems, you can also learn a lot from this tutorial!! But I EXTREMELY recommend the following link to you (remember to uncomment)
+
+% https://github.com/xuhdev/vim-latex-live-preview
+
+% This is the LaTeX compiling plug-in in Vim, which is a very powerful text/code writing and documenting software, and it is OPEN-SOURCE! But that's more or less advanced usage.
+
+% Now let's get started.
+
+% LaTeX uses backslash, i.e. "\", to indicate a built-in function.
+% The format of this LaTeX file is IEEE Transaction Journal, i.e. \documentclass[journal]{IEEEtran}
+\documentclass[journal]{IEEEtran}
+
+%%%%%%%%%%%%%%%%%
+%%% Head File (Preambles) %%%
+%%%%%%%%%%%%%%%%%
+
+% if you think they are tooooooo lengthy, you can put all of the preambles into ONE another "preamble.tex" file, and use command: \include{preamble} to replace the following tedious lists.
+
+\usepackage{amsmath}					% amsmath is IMPORTANT
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{amssymb}					% amssymb is IMPORTANT
+\usepackage{amsthm}					% amsthm is IMPORTANT
+\usepackage{amsfonts}					% amsfonts is IMPORTANT
+\usepackage{mathrsfs}					% mathrsfs is IMPORTANT
+\usepackage{mathtools}					% mathtools is IMPORTANT			
+\usepackage{mathdots}					% For dot sign
+\usepackage{fancyhdr}					% For head franchise 
+\usepackage{longtable}					% For long table
+\usepackage{xcolor}						% For colorful expression
+\usepackage{multirow, makecell}			% For fancy table cell and multi-row tables
+\usepackage{booktabs}					% For convenient booktabs
+\usepackage{siunitx}					% For miscellaneous math symbols
+\usepackage{nomencl}					% For nomenclature
+\usepackage[short]{optidef}				% For definition marks				
+\usepackage[utf8x]{inputenc}				% For unicode character
+\usepackage{kantlipsum}					% For fake Latin text in Kant style
+\usepackage[pdftex]{graphicx} 			% For adding figures (IMPORTANT)
+\usepackage{cite}						% For citations (IMPORTANT)
+\usepackage{pgfplots}					% For modifying plots and generating figures itself
+\usepackage{epstopdf}					% For transferring EPS file to PDF file and adding to LaTeX
+\usepackage{listings}					% For listing any code in LaTeX
+\usepackage{enumerate}					% For making list (IMPORTANT)
+\usepackage{tabularx}					% For making fancy tables (IMPORTANT)
+\usepackage[normalem]{ulem}				% For highlighting and emphasis
+\usepackage{algorithm, algorithmicx}		% For presenting algorithms
+\usepackage[flushleft]{threeparttable}		% For miscellaneous alignments
+\usepackage{changepage}				% For \adjustwidth command for writing pseudocodes
+
+% Those with IMPORTANT marks are critical for researchers to write a paper with many mathematical symbols and other fancy and convenient styles.
+
+% User-defined Functions
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}{Observation}
+\newtheorem{fact}{Fact}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{notation}{Notation}
+
+% Define the Graph Directory Path
+\graphicspath{ {/Users/gabriel79/Desktop/} }
+
+% Set Display Length
+\setlength{\abovedisplayskip}{0.1pt}
+\setlength{\belowdisplayskip}{0.1pt}
+
+% Define the cells to be used in Tables.
+% If you do not want to use cells now, delete all of them now.
+\def\InvB{\makecell{Trans. Investment\\ budget [M\$]}}
+\def\TotalCost{\makecell{Total\\ cost [M\$]}}
+\def\IterNum{\makecell{Iteration\\ number}}
+\def\WallTime{\makecell{Elapsed\\ time [s]}}
+\def\WallTimeh{\makecell{Elapsed\\ time [s]}}
+\def\TranExp{\makecell{Transmission\\ expansion}}
+\def\GenExp{\makecell{Generation \\ $\text{expansion}^*$}}
+\def\LoL{\makecell{Loss of\\ load rate}}
+\def\one{\makecell{{1}}}
+\def\two{\makecell{{2}}}
+\def\three{\makecell{{3}}}
+
+\def\TCo{\makecell{{1-5,} \\ {4-6}}}
+\def\GCo{\makecell{{1, 2,} \\ {3, 4, 5}}}
+\def\TcoC{\makecell{{99.16}}}
+\def\TcoD{\makecell{{104.57}}}
+\def\InoC{\makecell{{7}}}
+\def\InoD{\makecell{{8}}}
+\def\WtoC{\makecell{{9.2}}}
+\def\WtoD{\makecell{{25.4}}}
+\def\LoLoC{\makecell{{6.2\%}}}
+\def\LoLoD{\makecell{{7.3\%}}}
+
+\def\TCt{\makecell{{2-3, 2-5} \\ {3-5, 4-6}}}
+\def\TDt{\makecell{{1-5, 2-4} \\ {2-5, 2-6}}}
+\def\GCt{\makecell{{2, 4,} \\ {5, 6}}}
+\def\GDt{\makecell{{1, 2,} \\ {4, 6}}}
+\def\TctC{\makecell{{67.19}}}
+\def\TctD{\makecell{{63.57}}}
+\def\IntC{\makecell{{13}}}
+\def\IntD{\makecell{{11}}}
+\def\WttC{\makecell{{30.1}}}
+\def\WttD{\makecell{{166.5}}}
+\def\LoLtC{\makecell{{6.0\%}}}
+\def\LoLtD{\makecell{{5.2\%}}}
+
+\def\TCth{\makecell{{1-2, 2-3,} \\ {2-4, 2-5} \\ {4-6}}}
+\def\TDth{\makecell{{1-5, 2-3,} \\ {2-4, 3-4} \\ {4-6}}}
+\def\GCth{\makecell{{1, 2, 5}}}
+\def\GDth{\makecell{{2, 4, 5}}}
+\def\TcthC{\makecell{{56.51}}}
+\def\TcthD{\makecell{{59.71}}}
+\def\InthC{\makecell{{12}}}
+\def\InthD{\makecell{{9}}}
+\def\WtthC{\makecell{{27.3}}}
+\def\WtthD{\makecell{{110.2}}}
+\def\LoLthC{\makecell{{2.1\%}}}
+\def\LoLthD{\makecell{{2.1\%}}}
+
+\def\Type{\makecell{Types}}
+\def\Wind{\makecell{Wind}}
+\def\Conv{\makecell{Thermal}}
+\def\OpeC{\makecell{{Operational} \\ {cost} \\ {[\$/MWh]}}}
+\def\MaxC{\makecell{{Maximum} \\ {capacity} \\ {[MW]}}}
+\def\InvC{\makecell{{Investment} \\ {cost} \\ {[M\$]}}}
+\def\OpeCw{\makecell{0}}
+\def\OpeCc{\makecell{63}}
+\def\MaxCw{\makecell{300}}
+\def\MaxCc{\makecell{300}}
+\def\InvCw{\makecell{20}}
+\def\InvCc{\makecell{8}}
+
+\def\GInvB{\makecell{Gen. Investment\\ budget [M\$]}}
+
+% Here ends the Head File (Preambles).
+
+%%%%%%%%%%%%%%%%%
+%%%%%% Main File %%%%%%
+%%%%%%%%%%%%%%%%%
+
+% The Beginning of the Paper
+\begin{document}
+
+\title{A Fancy Tutorial for Writing IEEE Transaction Journal Paper in \LaTeX}
+
+\author{Gabriel~Yin,~\IEEEmembership{Student~Member,~IEEE,} and~Gabriel~Yin,~\IEEEmembership{Member~IEEE}
+
+\thanks{The work of G. Yin and G. Yin is partly supported by Southern Methodist University, U.S.A,  under Project DOD-PENTAGON-0001234. (seriously, NO)} 
+\thanks{G. Yin and G. Yin are with the Lyle School of Engineering, Southern Methodist University, TX, U.S.A. (emails: \{gyin, gyin\}@smu.edu).}}
+
+\markboth{IEEE TRANSACTION ON ...}
+{G. Yin\MakeLowercase{\textit{et al.}}: }
+\maketitle
+
+\begin{abstract}
+Type your Abstract.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Type your Keywords.
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
+\IEEEPARstart{H}{ere} is your intro. If you are going to use this Big ``H" head, please make efforts to finish this paragraph in three lines. Yes, like what I am doing now.\\
+\indent New Paragraph \dots\\
+\indent if you like to enumerate,
+\begin{enumerate}[1)] 
+\item First item.
+\item Second item.
+\end{enumerate}
+
+You can change the type of enumerate from 1) to i), or a), or just dot (delete the [1)].). And also you can use other functions like typing math within the enumeration. 
+\begin{enumerate}[a)] 
+\item First item: $\mathbb{G}\alpha b\text{riel}^{is} \mathcal{A} \ N_{ice} \ G_{uy}$.
+\item Second item.
+\end{enumerate}
+
+\texttt{Itemize} is another type of enumerate. It does not requires any package, but can only use dots to present the items.
+\begin{itemize}
+\item First item.
+\item Second item.
+\end{itemize}
+The rest of the paper is fivefold: BlahBlahBlah
+
+% New section
+\section{Mathematical Formulation and BlahBlahBlah}
+% Add your nomenclature. I keep my nomenclature for you guys for reference.
+% You can also put the nomenclature at the beginning.
+
+% And you might have noticed, it is a \subsection within a section.
+\subsection{Nomenclature}
+The major symbol notations used in this paper are presented here. Note that vectors and matrices are represented by bold lower-case and upper-case characters, respectively. Other notations are given throughout the paper if necessary.\\
+\noindent \emph{1) \ Sets}:
+\addcontentsline{toc}{section}{Nomenclature}
+\begin{IEEEdescription}[\IEEEusemathlabelsep\IEEEsetlabelwidth{$V_1,V_2,V_3$}]
+\item[$G \, / \, R \, / \, L$] Conventional generator / transmission line.
+\item[$S \, / \, V$] Sending/receiving bus of $\ell$th transmission line.
+\item[$C$] Generator\&bus mapping of $g$th or $r$th generator
+\item[$X^G \, / \, X^R$] Candidate traditional/renewable generator.
+\item[$X^L$] Candidate transmission line.
+\item[$T$] Planning horizon.
+\end{IEEEdescription}
+\emph{2) \ Indices}:
+\addcontentsline{toc}{section}{Nomenclature}
+\begin{IEEEdescription}[\IEEEusemathlabelsep\IEEEsetlabelwidth{$V_1,V_2,V_3$}]
+\item[$g \, / \, r \, / \, \ell$] Conventional generator / renewable generator / transmission line.
+\item[$d$] Demand.
+\item[$n$] Bus.
+\item[$\omega$] Scenario.
+\item[$k$] Iteration counter for C\&CG algorithm.
+\item[$o$] Iteration counter for L-shaped algorithm.
+\item[$t$] Planning year.
+\end{IEEEdescription}
+\emph{3) \ Parameters}:
+\addcontentsline{toc}{section}{Nomenclature}
+\begin{IEEEdescription}[\IEEEusemathlabelsep\IEEEsetlabelwidth{$V_1,V_2,V_3$}]
+\item[$IC_{g,t}^G/IC_{r,t}^R$] Investment cost for $g$th conventional / $r$th renewable generator in $t$th year [\$].
+\item[$IC_{\ell,t}^L$] Investment cost for $\ell$th transmission line in $t$th year [\$].
+\item[$OC_{g,t}$] Operating cost for $g$th generator in $t$th year [\$/MWh].
+\item[$PC_{d,t}$] Load-shedding cost for unserved load in $d$th demand in $t$th year [\$/MWh].
+\item[$B_t^G \, / \, B_t^L$] Investment budget for generator/transmission line in $t$th year [\$].
+\item[$K_t^G \, / \, K_t^L$] Contingency criteria for generator/transmission line in $t$th year.
+\item[$FL_{\ell,t}$] Flow capacity of $\ell$th transmission line in $t$th year [MW].
+\item[$\overline{PL}^G_{g,t}$] Capacity limit of $g$th conventional generator in $t$th year [ MW].
+\item[$\underline{\Delta}_{n,t} \, / \, \overline{\Delta}_{n,t}$] Angle limit of voltage angle at $n$th bus in $t$th year [rad].
+\end{IEEEdescription}
+\emph{4) \ Uncertain Parameters}:
+\begin{IEEEdescription}[\IEEEusemathlabelsep\IEEEsetlabelwidth{$V_1,V_2,V_3$}]
+\item[$\overline{PL}^R_{r,t}$] Capacity limit of $r$th renewable generator in $t$th year  [MW].
+\item[$P_{d,t}$] Demand of $d$th load in $t$th year [MW].
+\end{IEEEdescription}
+\emph{5) \ Variables}:
+\addcontentsline{toc}{section}{Nomenclature}
+\begin{IEEEdescription}[\IEEEusemathlabelsep\IEEEsetlabelwidth{$V_1,V_2,V_3$}]
+\item[$x_{g,t}^G/x_{r,t}^R$] Binary expansion decision for $g$th traditional / $r$th renewable generator in $t$th year. $x=1$ means built; $x=0$ otherwise.
+\item[$x_{\ell,t}^L$] Binary expansion decision for $\ell$th transmission line. $x=1$ means built; $x=0$ otherwise.
+\item[$a_{g,t}^G$] Binary outage indicator for $g$th conventional generator. $a=1$ means outage; $a=0$ otherwise.
+\item[$a_{\ell,t}^L$] Binary outage indicator for $\ell$th transmission line. $a=1$ means outage; $a=0$ otherwise.
+\item[$p^G_{g,t}/p^R_{r,t}$] Scheduled power output of $g$th conventional / $r$th renewable generator in $t$th year [MW].
+\item[$r_{d,t}$] Load shedding in $d$th demand in $t$th year [MW].
+\item[$f_{\ell,t}$] Power flow through $\ell$th transmission line in $t$th year [MW].
+\item[$\delta_{n,t}$] Voltage angle at $n$th bus in $t$th year [rad].
+\item[$\eta$] Dummy variable formulating a relaxed lower bound in the master problem.
+\end{IEEEdescription}
+% Your subsection starts here.
+\subsection{Problem Description}
+Here it flies ...
+
+% How to type your equation:
+
+\begin{align*} 
+% * means no numbering. You can add your own numbering by using \tag{1a}, \tag{1b} ... 
+% & means the same alignment.
+\makebox[0cm][r]~&\sum_{g}^{X^G}IC_{g,t}^Gx_{g,t}^G+\sum_{g}^{X^R}IC_{r,t}^Rx_{r,t}^R\leq B_t^G, \ \ \forall t, \tag{1a}\\
+& \sum_{\ell}^{X^L}IC_{\ell,t}^Lx_{\ell,t}^L\leq B_t^L, \ \ \forall t, \tag{1b} 
+\end{align*}
+Here is an example of auto-numbered align environment:
+\begin{align} 
+\makebox[0cm][r]~&\sum_{g}^{X^G}IC_{g,t}^Gx_{g,t}^G+\sum_{g}^{X^R}IC_{r,t}^Rx_{r,t}^R\leq B_t^G, \ \ \forall t, \\
+& \sum_{\ell}^{X^L}IC_{\ell,t}^Lx_{\ell,t}^L\leq B_t^L, \ \ \forall t,  
+\end{align}
+% After one equation, you don't want your paragraph to be indented right??
+\noindent Here it flies ...\\
+\indent Your new paragraph ...
+
+% So ends this section
+\section{Solution Strategy}
+BlahBlahBlah...
+\subsection{Hi}
+BlahBlahBlah...
+\subsection{Hey}
+BlahBlahBlah...
+\subsection{Algorithm (or so-called Pseudocode)}
+One paragon algorithm presentation is illustrated in Algorithm 1. You can find other formats in Google.
+\begin{algorithm}[H]
+% Exercise: Try to remove [H] and see what's gonna happen :P
+% Answer: [H] means stick to the position. 
+	\caption{Sample Algorithm Presentation}\label{alg:SAP}
+	\begin{algorithmic}
+		\State \emph{Initialization}: Set $o\leftarrow0$, $LB_o\leftarrow-\infty$, $UB_o\leftarrow \infty$, $\mathcal{O}_o=\emptyset$. 
+		\State \textbf{Step 1.} $o\leftarrow o+1$. 
+		\State \textbf{for} $d\in D$ \textbf{do}:
+		\begin{adjustwidth}{0.5cm}{}
+		\textbf{Step 2.} Write normal texts or $\mathbb{MATH} \ e^q_uations$.
+		\State \textbf{Step 3.} You can even use align or equation enviroments:
+\begin{align*}
+& \alpha = \frac{\log 4^7}{\min_a 6a}; & \boldsymbol{\beta} = -\sum_{\omega}\text{Good}_{\omega}\bold{H}_2^\top\boldsymbol{\gamma}.
+\end{align*}
+BlahBlahBlah\dots \end{adjustwidth}
+\textbf{end for}
+		\State \textbf{Step 4.} Update $UB_o = \min\{UB_{o-1}, \text{whatever}\}$ and $LB_o = \eta^o$. If $\left|\frac{UB_o-LB_o}{UB_o}\right|\leq\varepsilon$, then terminate, declare optimality and report $(\bold{x}^{o}, \bold{y}^{o})$.
+		\State \textbf{Step 5.} If you are an optimization guy like me, you might be familiar with:
+\begin{align*}
+M = \min_{\bold{x}, \bold{y}} \bold{c}_1^\top \bold{x}+\eta, 
+\end{align*}
+subject to
+\begin{align*}
+& \bold{H}_1^\top\bold{x}+\bold{K}_1^\top\bold{y}= \bold{r}_1, \\
+& \bold{A}_1^\top\bold{x}\leq \bold{b}_1, \\
+& \alpha_d^j+(\boldsymbol{\beta}_d^j)^\top\bold{y}\leq \eta/v_d, \ \ \forall j\in \mathcal{O}_o, \ \forall d\in D.
+\end{align*}
+Let $(\bold{x}^{o+1}, \bold{y}^{o+1}, \eta^{o+1})$ denote the optimal primal solution.\\
+\textbf{goto Step 1.} 
+	\end{algorithmic}
+\end{algorithm}
+Actually, you can make any pseudocode you want fancy with \texttt{adjustwidth} and \texttt{$\backslash$textbf}.\\
+\indent You can even make more subsubsubsubsubsubsection
+\subsubsection{Go Go Go}
+BlahBlahBlah...
+\subsubsection{Go Go Go}
+BlahBlahBlah...
+
+% How to add a figure: (Please uncomment them when using)
+
+%\begin{figure}
+%\centering
+%\caption{The name of the figure}
+%\includegraphics[width=9cm,height=16cm,keepaspectratio]{Your Figure Filename}
+%\end{figure}
+
+% Here goes the most important part: Case Studies!!!
+\section{Illustrative Example and Case Studies}
+
+% How to add a table:
+\begin{table}[H] 
+\caption{Results for Testing Two Methods}
+\centering
+\setlength\tabcolsep{3.5pt}
+  \begin{tabular}{lllllll}
+    \toprule
+    &
+      \multicolumn{3}{c}{Silver Bullet Method} &
+      \multicolumn{3}{c}{Werewolf Method} \\
+ 	\InvB & \one & \two & \three & \one & \two & \three\\ % They are cells!!!! see the preambles to check the cell definitions!
+            \midrule
+    \TranExp & \TCo & \TCt & \TCth & \TCo & \TDt & \TDth \\[0.22cm].  
+    \GenExp & \GCo & \GCt & \GCth & \GCo & \GDt & \GDth \\[0.22cm]
+    \TotalCost & \TcoC & \TctC & \TcthC & \TcoD & \TctD & \TcthD\\[0.22cm]
+    \LoL & \LoLoC & \LoLtC & \LoLthC & \LoLoD & \LoLtD & \LoLthD \\[0.22cm] 
+    \IterNum & \InoC & \IntC & \InthC & \InoD & \IntD & \InthD\\[0.22cm]
+    \WallTime & \WtoC &\WttC &\WtthC & \WtoD &\WttD & \WtthD \\
+    \bottomrule
+  \end{tabular}
+  % How to add a tablenotes:
+  \begin{tablenotes}
+      \small
+      \item $^*$Number shown in this row indicates the number of bus in which the generator is proposed to be built, and the same below.
+    \end{tablenotes}
+\end{table}
+% You can type your number yourself freely without using cells. But using cells makes it fancy according to my habits :)
+
+% Your subsection
+\subsection{IEEE 118-bus System}
+BlahBlahBlah...
+
+% You are approaching the end of the Paper!!! Huuuuuuuray!!!
+\section{Conclusion}
+Using my tutorial file can solve most of the problems in research writings. If you have any concern, just contact me without hesitation!
+
+% Here is the appendix
+\appendices
+\section{McCormick Relaxation}
+BlahBlahBlah\dots
+\section{Semi-convex Jensen's Inequality}
+BlahBlahBlah\dots
+% here is the acknowledgement
+\section*{Acknowledgment}
+The authors would like to thank Gabriel Yin for coaching them how to use \LaTeX. Any issue report or comment is SUPER welcome to be sent to \textcolor{blue}{\underline{gyin@smu.edu}}.
+
+% Don't be bothered with this part =_=!!
+\ifCLASSOPTIONcaptionsoff
+  \newpage
+\fi
+
+% Here goes your Bibtex References!! Uncomment them before using!
+% \bibliographystyle{ieeetr}         
+% \bibliography{YourBibFileName}
+
+% Here ends the Paper!! Go back to sleep!!
+
+\end{document}
